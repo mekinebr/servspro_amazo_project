@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Central de Tickets - SUPER MTV</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <span class="badge">SUPER MTV</span>
+      <h1>Central de Tickets</h1>
+      <p>Solicitações de canais, filmes, séries e correções de conteúdo.</p>
+    </div>
+    <button id="toggleAdmin" class="outline">Painel suporte</button>
+  </header>
+
+  <main class="layout">
+    <section id="clientArea" class="card">
+      <h2>Cadastro do cliente</h2>
+      <p class="muted">Cadastre o cliente uma vez e depois selecione para abrir chamados mais rápido.</p>
+
+      <div class="register-box">
+        <label>Cliente cadastrado
+          <select id="savedCustomer">
+            <option value="">Novo cliente / preencher manual</option>
+          </select>
+        </label>
+        <button id="saveCustomerBtn" class="secondary" type="button">Salvar cadastro</button>
+      </div>
+
+      <hr class="sep" />
+
+      <h2>Abrir chamado</h2>
+      <p class="muted">Para filmes e séries, digite o nome e escolha pela imagem quando aparecer.</p>
+
+      <form id="ticketForm" class="form">
+        <label>Nome do cliente
+          <input id="customerName" required placeholder="Ex: Nilson Santos" />
+        </label>
+
+        <label>Contato ou usuário
+          <input id="customerContact" required placeholder="Ex: WhatsApp, login ou código do cliente" />
+        </label>
+
+        <label>Plataforma
+          <select id="platform" required>
+            <option value="">Selecione</option>
+            <option>Plataforma 1</option>
+            <option>Plataforma 2</option>
+            <option>Plataforma 3</option>
+          </select>
+        </label>
+
+        <label>Tipo de chamado
+          <select id="ticketType" required>
+            <option value="">Selecione</option>
+            <option>Solicitar canal</option>
+            <option>Solicitar filme</option>
+            <option>Solicitar série</option>
+            <option>Correção de canal</option>
+            <option>Correção de filme</option>
+            <option>Correção de série</option>
+          </select>
+        </label>
+
+        <label id="contentLabel">Nome do conteúdo
+          <input id="contentName" required placeholder="Ex: HBO, Velozes e Furiosos, The Boys" autocomplete="off" />
+        </label>
+
+        <div id="catalogBox" class="catalog-box hidden">
+          <div class="catalog-head">
+            <b>Selecione o conteúdo pela imagem</b>
+            <small id="selectedContentText">Nenhum selecionado</small>
+          </div>
+          <div id="catalogResults" class="catalog-results"></div>
+        </div>
+
+        <label>Descrição do pedido ou problema
+          <textarea id="description" required rows="4" placeholder="Explique o que precisa: travando, sem áudio, episódio errado, canal fora, pedido novo..."></textarea>
+        </label>
+
+        <button type="submit" class="primary">Enviar chamado</button>
+      </form>
+
+      <div id="createdBox" class="success hidden"></div>
+    </section>
+
+    <section class="card">
+      <h2>Consultar chamado</h2>
+      <p class="muted">Digite o código gerado para acompanhar o atendimento.</p>
+      <div class="search-row">
+        <input id="searchCode" placeholder="Ex: TCK-123456" />
+        <button id="searchBtn" class="secondary">Consultar</button>
+      </div>
+      <div id="searchResult" class="result"></div>
+    </section>
+
+    <section id="adminArea" class="card admin hidden">
+      <div class="admin-head">
+        <div>
+          <h2>Painel do suporte</h2>
+          <p class="muted">Gerencie chamados abertos, em análise e resolvidos.</p>
+        </div>
+        <button id="clearAll" class="danger outline">Limpar testes</button>
+      </div>
+
+      <div id="loginBox" class="login-box">
+        <input id="adminPass" type="password" placeholder="Senha do suporte" />
+        <button id="loginBtn" class="primary">Entrar</button>
+        <small>Senha padrão: <b>1234</b></small>
+      </div>
+
+      <div id="adminPanel" class="hidden">
+        <div class="stats" id="stats"></div>
+        <div class="filters">
+          <select id="filterStatus">
+            <option value="">Todos os status</option>
+            <option>Novo</option>
+            <option>Em análise</option>
+            <option>Pedido realizado</option>
+            <option>Reparo feito</option>
+            <option>Não encontrado</option>
+            <option>Resolvido</option>
+          </select>
+          <select id="filterPlatform">
+            <option value="">Todas as plataformas</option>
+            <option>Plataforma 1</option>
+            <option>Plataforma 2</option>
+            <option>Plataforma 3</option>
+          </select>
+        </div>
+        <div id="ticketList" class="ticket-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
